@@ -37,7 +37,6 @@
                 </configuration>
 
                 <executions>
-
                     <!-- Ejecución de PMD -->
                     <execution>
                         <id>pmd-check</id>
@@ -57,13 +56,14 @@
                             <format>html</format>
                         </configuration>
                     </execution>
-
                 </executions>
             </plugin>
 
-            <!-- ======================================= -->
-            <!-- 3. MAVEN FORMATTER - FORMATO AUTOMÁTICO -->
-            <!-- ======================================= -->
+            
+
+            <!-- ============================ -->
+            <!-- FORMATTER                    -->
+            <!-- ============================ -->
             <plugin>
                 <groupId>net.revelc.code.formatter</groupId>
                 <artifactId>formatter-maven-plugin</artifactId>
