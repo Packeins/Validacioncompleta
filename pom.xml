@@ -2,7 +2,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
-         
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.proyecto</groupId>
@@ -13,7 +13,7 @@
         <plugins>
 
             <!-- =========================== -->
-            <!-- 1. PMD - ANALIZADOR ESTÁTICO -->
+            <!-- PMD + CPD (UNIFICADOS)     -->
             <!-- =========================== -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -21,15 +21,13 @@
                 <version>3.21.0</version>
 
                 <configuration>
-                    <!-- Para evitar errores de encoding -->
                     <targetJdk>17</targetJdk>
 
-                    <!-- Para mostrar reporte HTML -->
+                    <!-- Reporte HTML -->
                     <formats>
                         <format>html</format>
                     </formats>
 
-                    <!-- Activar reglas por defecto -->
                     <rulesets>
                         <ruleset>category/java/bestpractices.xml</ruleset>
                         <ruleset>category/java/design.xml</ruleset>
@@ -37,18 +35,18 @@
                         <ruleset>category/java/errorprone.xml</ruleset>
                     </rulesets>
                 </configuration>
-            </plugin>
-
-
-            <!-- =============================== -->
-            <!-- 2. CPD - COPY/PASTE DETECTOR     -->
-            <!-- =============================== -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.21.0</version>
 
                 <executions>
+
+                    <!-- Ejecución de PMD -->
+                    <execution>
+                        <id>pmd-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- Ejecución de CPD -->
                     <execution>
                         <id>cpd-check</id>
                         <goals>
@@ -59,9 +57,9 @@
                             <format>html</format>
                         </configuration>
                     </execution>
+
                 </executions>
             </plugin>
-
 
             <!-- ======================================= -->
             <!-- 3. MAVEN FORMATTER - FORMATO AUTOMÁTICO -->
@@ -70,6 +68,10 @@
                 <groupId>net.revelc.code.formatter</groupId>
                 <artifactId>formatter-maven-plugin</artifactId>
                 <version>2.23.0</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <lineEnding>LF</lineEnding>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
